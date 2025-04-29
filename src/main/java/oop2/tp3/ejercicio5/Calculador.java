@@ -1,55 +1,27 @@
 package oop2.tp3.ejercicio5;
 
-import java.util.List;
-
 
 public class Calculador {
 
-    public String reporte(Factura factura, List<Evento> eventos) {
+    public static final String FACTURACION_PARA = "Facturación para ";
+    public static final String LABEL_ASIENTOS = "Asientos:";
+    public static final String LABEL_MONTO_GANADO = "Monto ganado: ";
+    public static final String LABEL_CREDITOS_GANADOS = "Créditos ganados: ";
+
+    public String reporte(Factura factura) {
         float totalAmount = 0;
         float volumeCredits = 0;
-        var result = "Facturación para " + factura.nombreCliente() + System.lineSeparator();
+        var result = FACTURACION_PARA + factura.nombreCliente() + System.lineSeparator();
         var actuaciones = factura.actuaciones();
         for (var actuacion : actuaciones) {
-            float monto = 0;
-
-//            var tipo = eventos.stream()
-//                    .filter(e -> e.nombreEvento().equals(actuacion.nombreEvento()))
-//                    .findFirst()
-//                    .orElseThrow(() -> new RuntimeException("Evento no encontrado"))
-//                    .tipo();
-            monto = actuacion.calcularMonto();
-//            switch (tipo) {
-//                case "Drama":
-//                    monto = 40000;
-//                    if (actuacion.numberoEspectadores() > 30) {
-//                        monto += 1000 * (actuacion.numberoEspectadores() - 30);
-//                    }
-//                    break;
-//                case "Comedia":
-//                    monto = 30000;
-//                    if (actuacion.numberoEspectadores() > 20) {
-//                        monto += 10000 + 500 * (actuacion.numberoEspectadores() - 20);
-//                    }
-//                    monto += 300 * actuacion.numberoEspectadores();
-//                    break;
-//                default:
-//                    throw new RuntimeException("Tipo de evento no conocido");
-//            }
-
-            // creditos a ganar
+            float monto = actuacion.calcularMonto();
             volumeCredits += actuacion.calcularCreditos();
-            // creditos extras para comedia
-//            if ("Comedia".equals(tipo)) {
-//                volumeCredits += Math.floor(actuacion.numberoEspectadores() / 5);
-//            }
             volumeCredits += actuacion.adicionalCreditos();
-
-            result += actuacion.nombreEvento() + ": " + monto + ". Asientos: " + actuacion.espectadores() + System.lineSeparator();//` ${play.name}: ${format(thisAmount/100)} (${perf.audience} seats)\n`;
+            result += actuacion.nombreEvento() + ": " + monto + ". " + LABEL_ASIENTOS + " " + actuacion.espectadores() + System.lineSeparator();
             totalAmount += monto;
         }
-        result += "Monto ganado: " + totalAmount + System.lineSeparator();
-        result += "Créditos ganados: " + volumeCredits + System.lineSeparator();
+        result += LABEL_MONTO_GANADO + totalAmount + System.lineSeparator();
+        result += LABEL_CREDITOS_GANADOS + volumeCredits + System.lineSeparator();
 
         return result;
     }
