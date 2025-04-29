@@ -7,10 +7,10 @@ public class Drama extends Actuacion {
     }
 
     @Override
-    public float adicionalCreditos() {
-        return 0;
+    public float calcularCreditos() {
+        return Math.max(this.espectadores() - 30, 0);
     }
-
+    
     @Override
     public float calcularMonto() {
         float monto = 40000;

@@ -6,8 +6,8 @@ public class Comedia extends Actuacion {
     }
 
     @Override
-    public float adicionalCreditos() {
-        return (float) Math.floor(this.espectadores() / 5);
+    public float calcularCreditos() {
+        return Math.max(this.espectadores() - 30, 0) + (float) Math.floor(this.espectadores() / 5);
     }
 
     @Override

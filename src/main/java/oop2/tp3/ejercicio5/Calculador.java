@@ -16,7 +16,6 @@ public class Calculador {
         for (var actuacion : actuaciones) {
             float monto = actuacion.calcularMonto();
             volumeCredits += actuacion.calcularCreditos();
-            volumeCredits += actuacion.adicionalCreditos();
             result += actuacion.nombreEvento() + ": " + monto + ". " + LABEL_ASIENTOS + " " + actuacion.espectadores() + System.lineSeparator();
             totalAmount += monto;
         }
